@@ -1,4 +1,3 @@
-import HeroSection from "@/components/HeroSection";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
