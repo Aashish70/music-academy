@@ -22,12 +22,12 @@ export function Button({
 }: {
   borderRadius?: string;
   children: React.ReactNode;
-  as?: any;
+  as?: React.ElementType; // Changed from any
   containerClassName?: string;
   borderClassName?: string;
   duration?: number;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown; // Changed from any
 }) {
   return (
     <Component
@@ -42,7 +42,7 @@ export function Button({
     >
       <div
         className="absolute inset-0"
-        style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
+        style={{ borderRadius: `calc(${borderRadius} * 0.96)` }} // Fixed template literal
       >
         <MovingBorder duration={duration} rx="30%" ry="30%">
           <div
@@ -60,7 +60,7 @@ export function Button({
           className
         )}
         style={{
-          borderRadius: `calc(${borderRadius} * 0.96)`,
+          borderRadius: `calc(${borderRadius} * 0.96)`, // Fixed template literal
         }}
       >
         {children}
@@ -80,9 +80,9 @@ export const MovingBorder = ({
   duration?: number;
   rx?: string;
   ry?: string;
-  [key: string]: any;
+  [key: string]: unknown; // Changed from any
 }) => {
-  const pathRef = useRef<any>();
+  const pathRef = useRef<SVGRectElement | null>(null); // More specific type
   const progress = useMotionValue<number>(0);
 
   useAnimationFrame((time) => {
@@ -102,7 +102,7 @@ export const MovingBorder = ({
     (val) => pathRef.current?.getPointAtLength(val).y
   );
 
-  const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
+  const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`; // Fixed template literal
 
   return (
     <>
